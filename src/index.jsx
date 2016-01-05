@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {t} from '../i18n/translate';
+import {Button} from 'react-ui-library';
 
 const ProductCategoryRow = React.createClass({
     render: function() {
@@ -41,8 +43,8 @@ const ProductTable = React.createClass({
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
+                        <th>{t("Name")}</th>
+                        <th>{t("Price")}</th>
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>
@@ -111,11 +113,11 @@ const FilterableProductTable = React.createClass({
                     filterText={this.state.filterText}
                     inStockOnly={this.state.inStockOnly}
                 />
+              <Button type="primary" text={t("save")}/>
             </div>
         );
     }
 });
-
 
 const PRODUCTS = [
   {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
@@ -123,7 +125,7 @@ const PRODUCTS = [
   {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
   {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
   {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+  {category: t('Electronics'), price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
 
 ReactDOM.render(

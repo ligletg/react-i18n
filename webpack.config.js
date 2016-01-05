@@ -9,12 +9,17 @@ module.exports = {
     'webpack/hot/dev-server',
     'webpack/hot/only-dev-server',
     path.join(__dirname, '/src/index.jsx'),
+    path.join(nodeModulesPath, 'react-ui-library/src/index.js')
   ],
   resolve: {
     extensions: ["", ".js", ".jsx", ".html", ".json"],
+    alias: {
+      'react-18n': path.resolve(__dirname + '/src'),
+      'react-ui-library': path.join(nodeModulesPath, 'react-ui-library/src')
+    },
     modulesDirectories: [
       'node_modules',
-      path.resolve(__dirname, './node_modules')
+      path.join(nodeModulesPath, 'react-ui-library/node_modules')
     ]
   },
   devServer: {
@@ -22,7 +27,7 @@ module.exports = {
     devtool: 'eval',
     hot: true,
     inline: true,
-    port: 3000
+    port: 3002
   },
   devtool: 'eval',
   output: {
@@ -43,6 +48,7 @@ module.exports = {
     preLoaders: [{
       test: /\.(js|jsx)$/,
       loader: 'eslint-loader',
+      include: [path.resolve(__dirname, "src/app")],
       exclude: [nodeModulesPath]
     }],
     loaders: [{
@@ -55,7 +61,7 @@ module.exports = {
     }, {
       test: /\.(js|jsx)$/,
       loaders: ['react-hot', 'babel'],
-      exclude: [nodeModulesPath]
+      exclude: /node_modules/
     }, {
       test: /\.json$/,
       loaders: ['json-loader']
