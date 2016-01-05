@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import {translatedText} from '../i18n/translate/language/' + navigator.language;
 import {t} from '../i18n/translate';
 import {Button} from 'react-ui-library';
 
