@@ -8,10 +8,10 @@ req.keys().forEach(function (file) {
 });
 
 var i18n = {
-  t: (id) => {
-    var ret = exports[language][id];
+  t: (id, cmp) => {
+    var ret = exports[language][cmp.constructor.displayName][id];
     ret.defaultMessage += "_translated";
-    return ret;
+    return ret.defaultMessage;
   },
   locale: language
 };

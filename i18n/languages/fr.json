@@ -1,12 +1,33 @@
 {
-  "greetings": {
-    "id": "greetings",
-    "description": "Welcome greeting to the user",
-    "defaultMessage": "Bonjour {name}! Comment allez-vous aujourd'hui ?"
+  "FilterableProductTable": {
+    "save": {
+      "id": "save",
+      "description": "Text of the save button",
+      "defaultMessage": "Enregistrer"
+    }
   },
-  "greetings2": {
-    "id": "greetings2",
-    "description": "Alternative welcome greeting to the user",
-    "defaultMessage": "Bonjour {name}! Comment allez-vous ce matin ?"
+  "SearchBar": {
+    "search": {
+      "id": "search",
+      "description": "Empty text of the search bar",
+      "defaultMessage": "Rechercher..."
+    },
+    "showStock": {
+      "id": "showStock",
+      "description": "Text of the label show stock",
+      "defaultMessage": "N'afficher que les produits en stock"
+    }
+  },
+  "ProductTable": {
+    "name": {
+      "id": "name",
+      "description": "Text of the name column",
+      "defaultMessage": "Nom"
+    },
+    "price": {
+      "id": "price",
+      "description": "Text of the price column",
+      "defaultMessage": "Prix"
+    }
   }
 }
