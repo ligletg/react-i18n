@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button} from 'react-ui-library';
 import {i18n} from '../i18n/translate';
-import {IntlProvider, FormattedNumber, FormattedDate} from 'react-intl';
+import {IntlProvider, FormattedMessage, FormattedNumber, FormattedDate} from 'react-intl';
 
 const ProductCategoryRow = React.createClass({
     render: function() {
@@ -154,15 +154,17 @@ const App = React.createClass({
     mixins: [i18n],
 
     render: function () {
-        return (
-          <IntlProvider locale={this.locale}>
-            <FilterableProductTable products={PRODUCTS} />
-          </IntlProvider>
-        );
+      return (
+        <IntlProvider locale={this.locale}>
+          <FormattedMessage {...this.t('greetings2')}
+            values={{name: this.props.name}}
+          />
+        </IntlProvider>
+      );
     }
 });
 
 ReactDOM.render(
-    <App/>,
+    <App name={'bob'}/>,
     document.getElementById('app')
 );

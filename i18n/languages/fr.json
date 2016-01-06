@@ -1,13 +1,12 @@
 {
-  "FilterableProductTable": {
-    "save": "Enregistrer"
+  "greetings": {
+    "id": "greetings",
+    "description": "Welcome greeting to the user",
+    "defaultMessage": "Bonjour {name}! Comment allez-vous aujourd'hui ?"
   },
-  "SearchBar": {
-    "search": "Chercher...",
-    "showStock": "N'afficher que les produits en stock"
-  },
-  "ProductTable": {
-    "name": "Nom",
-    "price": "Prix"
+  "greetings2": {
+    "id": "greetings2",
+    "description": "Alternative welcome greeting to the user",
+    "defaultMessage": "Bonjour {name}! Comment allez-vous ce matin ?"
   }
 }

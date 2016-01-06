@@ -1,13 +1,12 @@
 {
-  "FilterableProductTable": {
-    "save": "Save Button"
+  "greetings": {
+    "id": "greetings",
+    "description": "Welcome greeting to the user",
+    "defaultMessage": "Hello {name}! How are you today ?"
   },
-  "SearchBar": {
-    "search": "Search...",
-    "showStock": "Only show products in stock"
-  },
-  "ProductTable": {
-    "name": "Name",
-    "price": "Price"
+  "greetings2": {
+    "id": "greetings2",
+    "description": "Alternative welcome greeting to the user",
+    "defaultMessage": "Hello {name}! How are you this morning ?"
   }
 }

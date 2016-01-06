@@ -8,13 +8,10 @@ req.keys().forEach(function (file) {
 });
 
 var i18n = {
-  t: (str, cmp) => {
-    console.log('translating ' + cmp.constructor.displayName + "...");
-    if (exports[language][cmp.constructor.displayName] !== undefined
-        && exports[language][cmp.constructor.displayName][str] !== undefined) {
-      return "+" + exports[language][cmp.constructor.displayName][str] + "+";
-    }
-    return "_" + str.toUpperCase() + "_"; //fallback
+  t: (id) => {
+    var ret = exports[language][id];
+    ret.defaultMessage += "_translated";
+    return ret;
   },
   locale: language
 };
