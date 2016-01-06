@@ -30,8 +30,10 @@
     "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
+    "i18n-js": "^1.0.0",
     "react": "^0.14",
     "react-dom": "^0.14.0",
+    "react-i18n": "0.0.3",
     "react-redux": "^4.0.1",
     "redux": "^3.0.5"
   }

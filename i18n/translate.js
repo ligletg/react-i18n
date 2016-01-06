@@ -7,11 +7,15 @@ req.keys().forEach(function (file) {
   exports[locale] = req(file);
 });
 
-
-var t = (str) => {
-  if (exports[language][str] !== undefined) {
-    return exports[language][str];
+var i18n = {
+  t: (str, cmp) => {
+    console.log('translating ' + cmp.constructor.displayName + "...");
+    if (exports[language][cmp.constructor.displayName] !== undefined
+        && exports[language][cmp.constructor.displayName][str] !== undefined) {
+      return "+" + exports[language][cmp.constructor.displayName][str] + "+";
+    }
+    return "_" + str.toUpperCase() + "_"; //fallback
   }
-  return "_" + str.toUpperCase() + "_";
 };
-export {t};
+
+export {i18n};

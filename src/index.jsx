@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import {translatedText} from '../i18n/translate/language/' + navigator.language;
-import {t} from '../i18n/translate';
 import {Button} from 'react-ui-library';
+import {i18n} from '../i18n/translate';
 
 const ProductCategoryRow = React.createClass({
     render: function() {
@@ -27,73 +26,83 @@ const ProductRow = React.createClass({
 });
 
 const ProductTable = React.createClass({
-    render: function() {
-        const rows = [];
-        let lastCategory = null;
-        this.props.products.forEach(function(product) {
-            if (product.name.indexOf(this.props.filterText) === -1 || (!product.stocked && this.props.inStockOnly)) {
-                return;
-            }
-            if (product.category !== lastCategory) {
-                rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
-            }
-            rows.push(<ProductRow product={product} key={product.name} />);
-            lastCategory = product.category;
-        }.bind(this));
-        return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>{t("Name")}</th>
-                        <th>{t("Price")}</th>
-                    </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
-        );
-    }
+  propTypes: {
+    t: React.PropTypes.func,
+  },
+  render: function() {
+    const rows = [];
+    let lastCategory = null;
+    this.props.products.forEach(function(product) {
+      if (product.name.indexOf(this.props.filterText) === -1 || (!product.stocked && this.props.inStockOnly)) {
+            return;
+      }
+      if (product.category !== lastCategory) {
+        rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
+      }
+      rows.push(<ProductRow product={product} key={product.name} />);
+      lastCategory = product.category;
+    }.bind(this));
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>{this.props.t('name', this)}</th>
+            <th>{this.props.t('price', this)}</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
 });
 
 const SearchBar = React.createClass({
-    handleChange: function() {
-        this.props.onUserInput(
-            this.refs.filterTextInput.value,
-            this.refs.inStockOnlyInput.checked
-        );
-    },
-    render: function() {
-        return (
-            <form>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={this.props.filterText}
-                    ref="filterTextInput"
-                    onChange={this.handleChange}
-                />
-                <p>
-                    <input
-                        type="checkbox"
-                        checked={this.props.inStockOnly}
-                        ref="inStockOnlyInput"
-                        onChange={this.handleChange}
-                    />
-                    {' '}
-                    Only show products in stock
-                </p>
-            </form>
-        );
-    }
+  propTypes: {
+    t: React.PropTypes.func,
+  },
+  handleChange: function() {
+    this.props.onUserInput(
+      this.refs.filterTextInput.value,
+      this.refs.inStockOnlyInput.checked
+    );
+  },
+  render: function() {
+    return (
+      <form>
+        <input
+          type="text"
+          placeholder={this.props.t("search", this)}
+          value={this.props.filterText}
+          ref="filterTextInput"
+          onChange={this.handleChange}
+        />
+        <p>
+          <input
+              type="checkbox"
+              checked={this.props.inStockOnly}
+              ref="inStockOnlyInput"
+              onChange={this.handleChange}
+          />
+          {' '}
+          {this.props.t("showStock", this)}
+        </p>
+      </form>
+    );
+  }
 });
 
-const FilterableProductTable = React.createClass({
-    getInitialState: function() {
-        return {
-            filterText: '',
-            inStockOnly: false
-        };
-    },
+const DefaultFilterMixin = {
+  getInitialState: function () {
+    return {
+      filterText: '',
+      inStockOnly: false
+    };
+  }
+};
 
+const FilterableProductTable = React.createClass({
+    mixins: [DefaultFilterMixin, i18n],
     handleUserInput: function(filterText, inStockOnly) {
         this.setState({
             filterText: filterText,
@@ -102,21 +111,23 @@ const FilterableProductTable = React.createClass({
     },
 
     render: function() {
-        return (
-            <div>
-                <SearchBar
-                    filterText={this.state.filterText}
-                    inStockOnly={this.state.inStockOnly}
-                    onUserInput={this.handleUserInput}
-                />
-                <ProductTable
-                    products={this.props.products}
-                    filterText={this.state.filterText}
-                    inStockOnly={this.state.inStockOnly}
-                />
-              <Button type="primary" text={t("save")}/>
-            </div>
-        );
+      return (
+        <div>
+          <SearchBar
+            t={this.t}
+            filterText={this.state.filterText}
+            inStockOnly={this.state.inStockOnly}
+            onUserInput={this.handleUserInput}
+          />
+          <ProductTable
+            t={this.t}
+            products={this.props.products}
+            filterText={this.state.filterText}
+            inStockOnly={this.state.inStockOnly}
+          />
+          <Button type="primary" text={this.t("save", this)}/>
+        </div>
+      );
     }
 });
 
@@ -126,7 +137,7 @@ const PRODUCTS = [
   {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
   {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
   {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: t('Electronics'), price: '$199.99', stocked: true, name: 'Nexus 7'}
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
 
 ReactDOM.render(

@@ -1,5 +1,13 @@
 {
-  "Name": "Name",
-  "Price": "Price",
-  "Save": "Save"
+  "FilterableProductTable": {
+    "save": "Save Button"
+  },
+  "SearchBar": {
+    "search": "Search...",
+    "showStock": "Only show products in stock"
+  },
+  "ProductTable": {
+    "name": "Name",
+    "price": "Price"
+  }
 }
