@@ -152,7 +152,9 @@ const PRODUCTS = [
 
 const App = React.createClass({
     mixins: [i18n],
-
+    propTypes: {
+      intl   : intlShape.isRequired
+    },
     render: function () {
       // const {formatMessage} = this.props.intl;
       // const greetingsTranslated = this.t('greetings');
@@ -169,9 +171,5 @@ const App = React.createClass({
       // );
     }
 });
-
-App.propTypes = {
-    intl   : intlShape.isRequired
-};
 
 export default injectIntl(App);

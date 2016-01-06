@@ -1,4 +1,9 @@
 {
+  "greetings": {
+    "id": "greetings",
+    "description": "Welcome greeting to the user",
+    "defaultMessage": "Hello {name}! How are you today ?"
+  },
   "FilterableProductTable": {
     "save": {
       "id": "save",
