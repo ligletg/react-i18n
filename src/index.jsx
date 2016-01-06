@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button} from 'react-ui-library';
 import {i18n} from '../i18n/translate';
+import {IntlProvider, FormattedNumber, FormattedDate} from 'react-intl';
 
 const ProductCategoryRow = React.createClass({
     render: function() {
@@ -19,7 +20,16 @@ const ProductRow = React.createClass({
         return (
             <tr>
                 <td>{name}</td>
-                <td>{this.props.product.price}</td>
+                <td>
+                  <FormattedNumber value={this.props.product.price} style="currency" currency="USD" />
+                </td>
+                <td>
+                  <FormattedDate
+                    value={new Date()}
+                    day="numeric"
+                    month="long"
+                    year="numeric" />
+                </td>
             </tr>
         );
     }
@@ -132,15 +142,27 @@ const FilterableProductTable = React.createClass({
 });
 
 const PRODUCTS = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+  {category: 'Sporting Goods', price: '49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '199.99', stocked: true, name: 'Nexus 7'}
 ];
 
+const App = React.createClass({
+    mixins: [i18n],
+
+    render: function () {
+        return (
+          <IntlProvider locale={this.locale}>
+            <FilterableProductTable products={PRODUCTS} />
+          </IntlProvider>
+        );
+    }
+});
+
 ReactDOM.render(
-    <FilterableProductTable products={PRODUCTS} />,
+    <App/>,
     document.getElementById('app')
 );

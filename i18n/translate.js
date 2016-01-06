@@ -15,7 +15,8 @@ var i18n = {
       return "+" + exports[language][cmp.constructor.displayName][str] + "+";
     }
     return "_" + str.toUpperCase() + "_"; //fallback
-  }
+  },
+  locale: language
 };
 
 export {i18n};
